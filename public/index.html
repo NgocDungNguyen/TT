@@ -556,6 +556,7 @@
 
 
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
         const startButton = document.getElementById('startButton');
         const countdownScreen = document.getElementById('countdownScreen');
@@ -631,7 +632,12 @@
                 },
                 body: JSON.stringify({ name, message }),
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 displayMessage(data.name, data.message);
             })
@@ -642,9 +648,18 @@
     
         function loadMessages() {
             fetch('/api/messages')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(messages => {
-                messages.forEach(msg => displayMessage(msg.name, msg.message));
+                if (Array.isArray(messages)) {
+                    messages.forEach(msg => displayMessage(msg.name, msg.message));
+                } else {
+                    console.error('Received data is not an array:', messages);
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
