@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
-const uri = process.env.MONGODB_URI;
+const uri = "mongodb+srv://inuyashayt2004:K81GAz3NdaWXUWzv@cluster0.lhks7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
 
 async function connectToDatabase() {
