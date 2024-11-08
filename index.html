@@ -524,61 +524,62 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const startButton = document.getElementById('startButton');
-        const countdownScreen = document.getElementById('countdownScreen');
-        const countdownNumber = document.getElementById('countdownNumber');
-        const landing = document.getElementById('landing');
-        const main = document.getElementById('main');
-        const enterBtn = document.getElementById('enterBtn');
-        const messageForm = document.getElementById('messageForm');
-        const messageList = document.getElementById('messageList');
-        const countdownElement = document.getElementById('countdown');
-        const musicControl = document.getElementById('musicControl');
-        const bgMusic = document.getElementById('bgMusic');
-        const countdownAudio = document.getElementById('countdownAudio');
-    
-        let count = 10;
-        let isMusicPlaying = false;
-    
-        function startCountdown() {
-            const countdownInterval = setInterval(() => {
-                count--;
-                countdownNumber.textContent = count;
-                if (count === 0) {
-                    clearInterval(countdownInterval);
-                    countdownScreen.style.display = 'none';
-                    landing.style.display = 'flex';
-                    countdownAudio.pause();
-                    playBackgroundMusic();
-                }
-            }, 1000);
-        }
-    
-        function playBackgroundMusic() {
-            bgMusic.play().then(() => {
-                isMusicPlaying = true;
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }).catch(error => console.error('Background music failed to play:', error));
-        }
-    
-        startButton.addEventListener('click', function() {
-            startButton.style.display = 'none';
-            countdownScreen.style.display = 'flex';
-            countdownAudio.play().then(() => {
-                startCountdown();
-            }).catch(error => {
-                console.error('Countdown audio failed to play:', error);
-                startCountdown(); // Start countdown even if audio fails to play
-            });
-        });
-    
-        enterBtn.addEventListener('click', function() {
-            landing.style.display = 'none';
-            main.style.display = 'block';
-            if (!isMusicPlaying) {
-                playBackgroundMusic();
+    const startButton = document.getElementById('startButton');
+    const countdownScreen = document.getElementById('countdownScreen');
+    const countdownNumber = document.getElementById('countdownNumber');
+    const landing = document.getElementById('landing');
+    const main = document.getElementById('main');
+    const enterBtn = document.getElementById('enterBtn');
+    const messageForm = document.getElementById('messageForm');
+    const messageList = document.getElementById('messageList');
+    const countdownElement = document.getElementById('countdown');
+    const musicControl = document.getElementById('musicControl');
+    const bgMusic = document.getElementById('bgMusic');
+    const countdownAudio = document.getElementById('countdownAudio');
+
+    let count = 10;
+    let isMusicPlaying = false;
+
+    function startCountdown() {
+        const countdownInterval = setInterval(() => {
+            count--;
+            countdownNumber.textContent = count;
+            if (count === 0) {
+                clearInterval(countdownInterval);
+                countdownScreen.style.display = 'none';
+                landing.style.display = 'flex';
+                countdownAudio.pause();
+                // Remove the automatic play of background music here
             }
+        }, 1000);
+    }
+
+    function playBackgroundMusic() {
+        bgMusic.play().then(() => {
+            isMusicPlaying = true;
+            musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }).catch(error => console.error('Background music failed to play:', error));
+    }
+
+    startButton.addEventListener('click', function() {
+        startButton.style.display = 'none';
+        countdownScreen.style.display = 'flex';
+        countdownAudio.play().then(() => {
+            startCountdown();
+        }).catch(error => {
+            console.error('Countdown audio failed to play:', error);
+            startCountdown(); // Start countdown even if audio fails to play
         });
+    });
+
+    enterBtn.addEventListener('click', function() {
+        landing.style.display = 'none';
+        main.style.display = 'block';
+        // Play background music when user clicks "Enter"
+        if (!isMusicPlaying) {
+            playBackgroundMusic();
+        }
+    });
     
         messageForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -620,16 +621,16 @@
             }
         }, 1000);
     
-        musicControl.addEventListener('click', function() {
-            if (bgMusic.paused) {
-                playBackgroundMusic();
-            } else {
-                bgMusic.pause();
-                isMusicPlaying = false;
-                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            }
-        });
+         musicControl.addEventListener('click', function() {
+        if (bgMusic.paused) {
+            playBackgroundMusic();
+        } else {
+            bgMusic.pause();
+            isMusicPlaying = false;
+            musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        }
     });
+});
 </script>
 </body>
 </html>
