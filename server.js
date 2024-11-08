@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+const express = require('express');
 const cors = require('cors');
+const { MongoClient } = require('mongodb');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,28 +9,45 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
-const messagesFile = path.join(__dirname, 'messages.json');
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
 
-// Ensure the messages file exists
-if (!fs.existsSync(messagesFile)) {
-  fs.writeFileSync(messagesFile, '[]');
+async function connectToDatabase() {
+  try {
+    await client.connect();
+    console.log('Connected to MongoDB');
+  } catch (e) {
+    console.error('Failed to connect to MongoDB', e);
+  }
 }
 
-app.get('/api/messages', (req, res) => {
-  const messages = JSON.parse(fs.readFileSync(messagesFile));
-  res.json(messages);
+connectToDatabase();
+
+app.get('/api/messages', async (req, res) => {
+  try {
+    const database = client.db('birthdayApp');
+    const messages = database.collection('messages');
+    const result = await messages.find().sort({ timestamp: -1 }).toArray();
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch messages' });
+  }
 });
 
-app.post('/api/messages', (req, res) => {
-  const messages = JSON.parse(fs.readFileSync(messagesFile));
-  const newMessage = {
-    name: req.body.name,
-    message: req.body.message,
-    timestamp: new Date().toISOString()
-  };
-  messages.push(newMessage);
-  fs.writeFileSync(messagesFile, JSON.stringify(messages));
-  res.status(201).json(newMessage);
+app.post('/api/messages', async (req, res) => {
+  try {
+    const database = client.db('birthdayApp');
+    const messages = database.collection('messages');
+    const newMessage = {
+      name: req.body.name,
+      message: req.body.message,
+      timestamp: new Date()
+    };
+    await messages.insertOne(newMessage);
+    res.status(201).json(newMessage);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to add message' });
+  }
 });
 
 app.listen(port, () => {
