@@ -518,7 +518,7 @@
     Your browser does not support the audio element.
 </audio>
 <audio id="bgMusic" loop>
-    <source src="./HPBD.mp3" type="audio/mpeg" />
+    <source src="HPBD.MP3" type="audio/mpeg" />
     Your browser does not support the audio element.
 </audio>
 
@@ -536,10 +536,10 @@
         const musicControl = document.getElementById('musicControl');
         const bgMusic = document.getElementById('bgMusic');
         const countdownAudio = document.getElementById('countdownAudio');
-
+    
         let count = 10;
-
-        // Function to start the countdown
+        let isMusicPlaying = false;
+    
         function startCountdown() {
             const countdownInterval = setInterval(() => {
                 count--;
@@ -549,12 +549,18 @@
                     countdownScreen.style.display = 'none';
                     landing.style.display = 'flex';
                     countdownAudio.pause();
-                    bgMusic.play().catch(error => console.error('Background music failed to play:', error));
+                    playBackgroundMusic();
                 }
             }, 1000);
         }
-
-        // Start button event listener
+    
+        function playBackgroundMusic() {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }).catch(error => console.error('Background music failed to play:', error));
+        }
+    
         startButton.addEventListener('click', function() {
             startButton.style.display = 'none';
             countdownScreen.style.display = 'flex';
@@ -565,12 +571,15 @@
                 startCountdown(); // Start countdown even if audio fails to play
             });
         });
-
+    
         enterBtn.addEventListener('click', function() {
             landing.style.display = 'none';
             main.style.display = 'block';
+            if (!isMusicPlaying) {
+                playBackgroundMusic();
+            }
         });
-
+    
         messageForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const name = document.getElementById('name').value;
@@ -578,26 +587,26 @@
             addMessage(name, message);
             messageForm.reset();
         });
-
+    
         function addMessage(name, message) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('message');
             messageElement.innerHTML = `<strong>${name}:</strong> ${message}`;
             messageList.prepend(messageElement);
-
+    
             const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
             messages.push({ name, message });
             localStorage.setItem('birthdayMessages', JSON.stringify(messages));
         }
-
+    
         const savedMessages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
         savedMessages.forEach(msg => addMessage(msg.name, msg.message));
-
+    
         const birthday = new Date('2024-08-11').getTime();
         const countdownTimer = setInterval(function() {
             const now = new Date().getTime();
             const distance = birthday - now;
-
+    
             if (distance < 0) {
                 clearInterval(countdownTimer);
                 countdownElement.innerHTML = "Happy Birthday, Thủy Tiên!";
@@ -606,17 +615,17 @@
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+    
                 countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s until Thủy Tiên's Birthday!`;
             }
         }, 1000);
-
+    
         musicControl.addEventListener('click', function() {
             if (bgMusic.paused) {
-                bgMusic.play();
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                playBackgroundMusic();
             } else {
                 bgMusic.pause();
+                isMusicPlaying = false;
                 musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
             }
         });
