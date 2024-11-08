@@ -30,6 +30,7 @@ app.get('/api/messages', async (req, res) => {
     const result = await messages.find().sort({ timestamp: -1 }).toArray();
     res.json(result);
   } catch (e) {
+    console.error('Error fetching messages:', e);
     res.status(500).json({ error: 'Failed to fetch messages' });
   }
 });
@@ -46,6 +47,7 @@ app.post('/api/messages', async (req, res) => {
     await messages.insertOne(newMessage);
     res.status(201).json(newMessage);
   } catch (e) {
+    console.error('Error adding message:', e);
     res.status(500).json({ error: 'Failed to add message' });
   }
 });
@@ -53,3 +55,37 @@ app.post('/api/messages', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+```
+
+2. Update your client-side JavaScript (in your HTML file or separate script.js):
+
+```javascript
+function loadMessages() {
+    fetch('/api/messages')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(messages => {
+        if (Array.isArray(messages)) {
+            messages.forEach(msg => displayMessage(msg.name, msg.message));
+        } else {
+            console.error('Received data is not an array:', messages);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function displayMessage(name, message) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+    messageElement.innerHTML = `<strong>${name}:</strong> ${message}`;
+    document.getElementById('messageList').prepend(messageElement);
+}
+
+// Call loadMessages when the page loads
+document.addEventListener('DOMContentLoaded', loadMessages);
