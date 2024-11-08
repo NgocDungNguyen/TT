@@ -656,6 +656,7 @@
             })
             .then(messages => {
                 if (Array.isArray(messages)) {
+                    messageList.innerHTML = ''; // Clear existing messages
                     messages.forEach(msg => displayMessage(msg.name, msg.message));
                 } else {
                     console.error('Received data is not an array:', messages);
@@ -663,6 +664,7 @@
             })
             .catch((error) => {
                 console.error('Error:', error);
+                messageList.innerHTML = '<p>Failed to load messages. Please try again later.</p>';
             });
         }
     

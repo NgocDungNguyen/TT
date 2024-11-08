@@ -18,6 +18,7 @@ async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected to MongoDB');
+    database = client.db('birthdayApp');
   } catch (e) {
     console.error('Failed to connect to MongoDB', e);
   }
@@ -28,7 +29,7 @@ connectToDatabase();
 app.get('/api/messages', async (req, res) => {
   try {
     if (!database) {
-      throw new Error('Database not initialized');
+      return res.status(500).json({ error: 'Database not initialized' });
     }
     const messages = database.collection('messages');
     const result = await messages.find().sort({ timestamp: -1 }).toArray();
@@ -42,7 +43,7 @@ app.get('/api/messages', async (req, res) => {
 app.post('/api/messages', async (req, res) => {
   try {
     if (!database) {
-      throw new Error('Database not initialized');
+      return res.status(500).json({ error: 'Database not initialized' });
     }
     const messages = database.collection('messages');
     const newMessage = {
