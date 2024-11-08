@@ -1,0 +1,626 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Happy Birthday, Thủy Tiên!
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .countdown-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .countdown-number {
+            font-size: 10rem;
+            color: #fff;
+            animation: pulse 1s infinite;
+        }
+
+        .landing {
+            height: 100vh;
+            background: url('28.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .landing h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 2rem;
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background-color: #ff69b4;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .btn:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #ff69b4;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-in-out;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff69b4;
+        }
+
+        section {
+            margin: 2rem 0;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        section h2 {
+            color: #ff69b4;
+            margin-bottom: 1rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .messages form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .messages input,
+        .messages textarea {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .messages button {
+            align-self: flex-start;
+        }
+
+        .message-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .message {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .message:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .message strong {
+            color: #ff69b4;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .memory-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .memory-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .memory-card .content {
+            padding: 1rem;
+        }
+
+        .memory-card h3 {
+            color: #ff69b4;
+            margin-bottom: 0.5rem;
+        }
+
+        #countdown {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #333;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .landing h1 {
+                font-size: 2.5rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.6rem;
+                font-size: 1rem;
+            }
+
+            .gallery, .message-list, .memory-wall {
+                grid-template-columns: 1fr;
+            }
+
+            #countdown {
+                font-size: 1.2rem;
+            }
+
+            .countdown-number {
+                font-size: 6rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+  </style>
+ </head>
+ 
+ <body>
+    <div class="countdown-screen" id="countdownScreen">
+        <div class="countdown-number" id="countdownNumber">10</div>
+    </div>
+    <div class="landing" id="landing" style="display: none;">
+        <h1>Happy Birthday, Thủy Tiên!</h1>
+        <button class="btn" id="enterBtn">Enter</button>
+    </div>
+    <div class="main" id="main" style="display: none;">
+        <header>
+            <h1>A Celebration of Thủy Tiên!</h1>
+            <p>Join us in celebrating our amazing precious IEC member!</p>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#messages">Messages</a></li>
+                <li><a href="#memory-wall">Memory Wall</a></li>
+            </ul>
+        </nav>
+        <div id="countdown"></div>
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div class="gallery">
+                <img src="1.jpg" alt="Thủy Tiên at an IEC event" width="300" height="200"/>
+                <img src="2.jpg" alt="Thủy Tiên with IEC members" width="300" height="200"/>
+                <img src="3.jpg" alt="Thủy Tiên at an IEC project" width="300" height="200"/>
+                <img src="4.jpg" alt="Thủy Tiên celebrating with IEC" width="300" height="200"/>
+                <img src="5.jpg" alt="Thủy Tiên at an IEC gathering" width="300" height="200"/>
+                <img src="6.jpg" alt="Thủy Tiên leading an IEC activity" width="300" height="200"/>
+                <img src="7.jpg" alt="Thủy Tiên at an IEC event" width="300" height="200"/>
+                <img src="8.jpg" alt="Thủy Tiên with IEC friends" width="300" height="200"/>
+                <img src="9.jpg" alt="Thủy Tiên at an IEC celebration" width="300" height="200"/>
+                <img src="10.jpg" alt="Thủy Tiên at an IEC project" width="300" height="200"/>
+                <video width="300" height="200" autoplay loop muted>
+                    <source src="11.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+        <section class="messages" id="messages">
+            <h2>Birthday Messages</h2>
+            <form id="messageForm">
+                <input id="name" placeholder="Your Name" required="" type="text"/>
+                <textarea id="message" placeholder="Your Message" required=""></textarea>
+                <button class="btn" type="submit">Send Message</button>
+            </form>
+            <div class="message-list" id="messageList"></div>
+        </section>
+        <section id="memory-wall">
+            <h2>Memory Wall</h2>
+            <div class="memory-wall">
+                <div class="memory-card">
+                    <video width="320" height="240" autoplay loop muted>
+                        <source src="12.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>  
+                    <div class="content">
+                        <h3>First Day at IEC</h3>
+                        <p>Remember when Thủy Tiên joined IEC and immediately impressed everyone with her ideas? What a start!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="13.jpg" alt="Thủy Tiên at IEC Talent Show" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Talent Show</h3>
+                        <p>Thủy Tiên's performance at our club's talent show was unforgettable!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="14.jpg" alt="Thủy Tiên at an IEC event" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Event</h3>
+                        <p>Another memorable moment with Thủy Tiên at an IEC event!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="15.jpg" alt="Thủy Tiên leading a workshop" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Workshop</h3>
+                        <p>Thủy Tiên's leadership shines through in every workshop she leads!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="16.jpg" alt="Thủy Tiên at an IEC social gathering" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Social</h3>
+                        <p>Thủy Tiên always brings joy and laughter to our social gatherings!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="17.jpg" alt="Thủy Tiên presenting at an IEC conference" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Conference</h3>
+                        <p>Thủy Tiên's presentations always captivate the audience!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="18.jpg" alt="Thủy Tiên volunteering with IEC" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Volunteer Work</h3>
+                        <p>Thủy Tiên's dedication to community service is truly inspiring!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="19.jpg" alt="Thủy Tiên at an IEC cultural event" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Cultural Celebration</h3>
+                        <p>Thủy Tiên's enthusiasm for cultural exchange is contagious!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="20.jpg" alt="Thủy Tiên receiving an IEC award" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Award Ceremony</h3>
+                        <p>Thủy Tiên's hard work and dedication are always recognized!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="21.jpg" alt="Thủy Tiên at an IEC team-building event" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Team Building</h3>
+                        <p>Thủy Tiên's team spirit always shines through in our activities!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="22.jpg" alt="Thủy Tiên mentoring new IEC members" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Mentorship</h3>
+                        <p>Thủy Tiên's guidance is invaluable to our new members!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="23.jpg" alt="Thủy Tiên at an IEC fundraising event" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Fundraiser</h3>
+                        <p>Thủy Tiên's efforts in our fundraisers are always appreciated!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="24.jpg" alt="Thủy Tiên during an IEC study session" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Study Group</h3>
+                        <p>Thủy Tiên's dedication to learning inspires us all!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="25.jpg" alt="Thủy Tiên at an IEC sports day" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Sports Day</h3>
+                        <p>Thủy Tiên's competitive spirit always livens up our sports events!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="26.jpg" alt="Thủy Tiên during an IEC brainstorming session" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Brainstorming</h3>
+                        <p>Thủy Tiên's creative ideas always push our projects forward!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="27.jpg" alt="Thủy Tiên at an IEC networking event" width="300" height="200"/>
+                    <div class="content">
+                        <h3>IEC Networking</h3>
+                        <p>Thủy Tiên's networking skills are truly impressive!</p>
+                    </div>
+                </div>
+                <div class="memory-card">
+                    <img src="29.jpg" alt="Thủy Tiên at a recent IEC gathering" width="300" height="200"/>
+                    <div class="content">
+                        <h3>Recent IEC Gathering</h3>
+                        <p>Thủy Tiên continues to bring joy and inspiration to our IEC family!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>Happy Birthday from all of us at IEC! Here's to many more amazing memories together!</p>
+    </footer>
+
+<div id="startButton" style="position: fixed; top: 68%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; background-color: #ff69b4; color: white; padding: 20px; border-radius: 10px; cursor: pointer;">
+    Click to Start
+</div>
+
+<div class="music-control" id="musicControl">
+    <i class="fas fa-music"></i>
+</div>
+<audio id="countdownAudio">
+    <source src="./101.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+</audio>
+<audio id="bgMusic" loop>
+    <source src="./HPBD.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const startButton = document.getElementById('startButton');
+        const countdownScreen = document.getElementById('countdownScreen');
+        const countdownNumber = document.getElementById('countdownNumber');
+        const landing = document.getElementById('landing');
+        const main = document.getElementById('main');
+        const enterBtn = document.getElementById('enterBtn');
+        const messageForm = document.getElementById('messageForm');
+        const messageList = document.getElementById('messageList');
+        const countdownElement = document.getElementById('countdown');
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        const countdownAudio = document.getElementById('countdownAudio');
+
+        let count = 10;
+
+        // Function to start the countdown
+        function startCountdown() {
+            const countdownInterval = setInterval(() => {
+                count--;
+                countdownNumber.textContent = count;
+                if (count === 0) {
+                    clearInterval(countdownInterval);
+                    countdownScreen.style.display = 'none';
+                    landing.style.display = 'flex';
+                    countdownAudio.pause();
+                    bgMusic.play().catch(error => console.error('Background music failed to play:', error));
+                }
+            }, 1000);
+        }
+
+        // Start button event listener
+        startButton.addEventListener('click', function() {
+            startButton.style.display = 'none';
+            countdownScreen.style.display = 'flex';
+            countdownAudio.play().then(() => {
+                startCountdown();
+            }).catch(error => {
+                console.error('Countdown audio failed to play:', error);
+                startCountdown(); // Start countdown even if audio fails to play
+            });
+        });
+
+        enterBtn.addEventListener('click', function() {
+            landing.style.display = 'none';
+            main.style.display = 'block';
+        });
+
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            addMessage(name, message);
+            messageForm.reset();
+        });
+
+        function addMessage(name, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.innerHTML = `<strong>${name}:</strong> ${message}`;
+            messageList.prepend(messageElement);
+
+            const messages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+            messages.push({ name, message });
+            localStorage.setItem('birthdayMessages', JSON.stringify(messages));
+        }
+
+        const savedMessages = JSON.parse(localStorage.getItem('birthdayMessages') || '[]');
+        savedMessages.forEach(msg => addMessage(msg.name, msg.message));
+
+        const birthday = new Date('2024-08-11').getTime();
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = birthday - now;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                countdownElement.innerHTML = "Happy Birthday, Thủy Tiên!";
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s until Thủy Tiên's Birthday!`;
+            }
+        }, 1000);
+
+        musicControl.addEventListener('click', function() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                bgMusic.pause();
+                musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        });
+    });
+</script>
+</body>
+</html>
