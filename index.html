@@ -1,24 +1,23 @@
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Happy Birthday, Thủy Tiên!
-  </title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   * {
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Happy Birthday, Thủy Tiên!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
             color: #333;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .countdown-screen {
@@ -38,11 +37,12 @@
             font-size: 10rem;
             color: #fff;
             animation: pulse 1s infinite;
+            font-family: 'Playfair Display', serif;
         }
 
         .landing {
             height: 100vh;
-            background: url('28.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('28.jpg') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -53,11 +53,12 @@
         }
 
         .landing h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             margin-bottom: 2rem;
             animation: slideInDown 1s ease-in-out;
+            font-family: 'Playfair Display', serif;
         }
 
         .btn {
@@ -70,6 +71,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .btn:hover {
@@ -80,27 +84,37 @@
         .main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem;
+            padding: 2rem;
             animation: fadeIn 2s ease-in-out;
         }
 
         header {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #ff69b4;
             margin-bottom: 1rem;
             animation: slideInDown 1s ease-in-out;
+            font-family: 'Playfair Display', serif;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #666;
         }
 
         nav {
             background-color: #333;
             padding: 1rem;
             border-radius: 10px;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             animation: slideInLeft 1s ease-in-out;
         }
 
@@ -112,7 +126,7 @@
         }
 
         nav ul li {
-            margin: 0.5rem;
+            margin: 0.5rem 1rem;
         }
 
         nav ul li a {
@@ -120,6 +134,7 @@
             text-decoration: none;
             font-size: 1.1rem;
             transition: color 0.3s ease;
+            font-weight: 600;
         }
 
         nav ul li a:hover {
@@ -127,8 +142,8 @@
         }
 
         section {
-            margin: 2rem 0;
-            padding: 1rem;
+            margin: 3rem 0;
+            padding: 2rem;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -137,40 +152,45 @@
 
         section h2 {
             color: #ff69b4;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            text-align: center;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
         }
 
-        .gallery img {
+        .gallery img, .gallery video {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
             border-radius: 10px;
             transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .gallery img:hover {
+        .gallery img:hover, .gallery video:hover {
             transform: scale(1.05);
         }
 
         .messages form {
             display: flex;
             flex-direction: column;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto 2rem;
         }
 
         .messages input,
         .messages textarea {
             margin-bottom: 1rem;
-            padding: 0.5rem;
+            padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 1rem;
         }
 
         .messages button {
@@ -179,14 +199,14 @@
 
         .message-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .message {
             background-color: #f9f9f9;
-            padding: 1rem;
-            border-radius: 5px;
+            padding: 1.5rem;
+            border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
@@ -200,12 +220,13 @@
             color: #ff69b4;
             display: block;
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         .memory-wall {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .memory-card {
@@ -217,30 +238,34 @@
         }
 
         .memory-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        .memory-card img {
+        .memory-card img, .memory-card video {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
         }
 
         .memory-card .content {
-            padding: 1rem;
+            padding: 1.5rem;
         }
 
         .memory-card h3 {
             color: #ff69b4;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-family: 'Playfair Display', serif;
         }
 
         #countdown {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-align: center;
             margin: 2rem 0;
             animation: fadeIn 2s ease-in-out;
+            color: #ff69b4;
+            font-weight: 600;
         }
 
         footer {
@@ -249,6 +274,7 @@
             background-color: #333;
             color: #fff;
             animation: fadeIn 2s ease-in-out;
+            font-size: 1.1rem;
         }
 
         .music-control {
@@ -257,20 +283,21 @@
             right: 20px;
             background-color: #ff69b4;
             color: #fff;
-            padding: 0.5rem;
+            padding: 1rem;
             border-radius: 50%;
             cursor: pointer;
             z-index: 1000;
             animation: bounce 2s infinite;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
             .landing h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
 
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .btn {
@@ -283,7 +310,7 @@
             }
 
             #countdown {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
 
             .countdown-number {
@@ -322,21 +349,20 @@
             40% { transform: translateY(-30px); }
             60% { transform: translateY(-15px); }
         }
-  </style>
- </head>
- 
- <body>
+    </style>
+</head>
+<body>
     <div class="countdown-screen" id="countdownScreen">
         <div class="countdown-number" id="countdownNumber">10</div>
     </div>
     <div class="landing" id="landing" style="display: none;">
         <h1>Happy Birthday, Thủy Tiên!</h1>
-        <button class="btn" id="enterBtn">Enter</button>
+        <button class="btn" id="enterBtn">Enter the Celebration</button>
     </div>
     <div class="main" id="main" style="display: none;">
         <header>
-            <h1>A Celebration of Thủy Tiên!</h1>
-            <p>Join us in celebrating our amazing precious IEC member!</p>
+            <h1>Celebrating Thủy Tiên</h1>
+            <p>A journey through memories, laughter, and love</p>
         </header>
         <nav>
             <ul>
@@ -347,7 +373,7 @@
         </nav>
         <div id="countdown"></div>
         <section id="gallery">
-            <h2>Gallery</h2>
+            <h2>Moments Captured</h2>
             <div class="gallery">
                 <img src="./1.jpg" alt="Thủy Tiên at an IEC event" width="300" height="200"/>
                 <img src="./2.jpg" alt="Thủy Tiên with IEC members" width="300" height="200"/>
@@ -366,16 +392,16 @@
             </div>
         </section>
         <section class="messages" id="messages">
-            <h2>Birthday Messages</h2>
+            <h2>Birthday Wishes</h2>
             <form id="messageForm">
                 <input id="name" placeholder="Your Name" required="" type="text"/>
                 <textarea id="message" placeholder="Your Message" required=""></textarea>
-                <button class="btn" type="submit">Send Message</button>
+                <button class="btn" type="submit">Send Your Wish</button>
             </form>
             <div class="message-list" id="messageList"></div>
         </section>
         <section id="memory-wall">
-            <h2>Memory Wall</h2>
+            <h2>A Tapestry of Memories</h2>
             <div class="memory-wall">
                 <div class="memory-card">
                     <video width="320" height="240" autoplay loop muted>
@@ -503,8 +529,24 @@
         </section>
     </div>
     <footer>
-        <p>Happy Birthday from all of us at IEC! Here's to many more amazing memories together!</p>
+        <p>Happy Birthday, Thủy Tiên! Your presence in IEC has made our journey brighter and more meaningful. Here's to many more years of friendship, growth, and shared memories!</p>
     </footer>
+
+    <div id="startButton" style="position: fixed; top: 68%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; background-color: #ff69b4; color: white; padding: 20px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+        Click to Start the Celebration
+    </div>
+
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-music"></i>
+    </div>
+    <audio id="countdownAudio">
+        <source src="./101.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="bgMusic" loop>
+        <source src="HPBD.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
 
 <div id="startButton" style="position: fixed; top: 68%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; background-color: #ff69b4; color: white; padding: 20px; border-radius: 10px; cursor: pointer;">
     Click to Start
